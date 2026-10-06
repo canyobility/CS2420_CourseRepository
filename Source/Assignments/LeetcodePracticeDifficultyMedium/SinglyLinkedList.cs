@@ -10,7 +10,7 @@ namespace Source.Assignments.NewFolder
     /// Custom implimentation of a generic singly linked list class. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SinglyLinkedList<T>() : IEnumerable<T>
+    public class SinglyLinkedList<T>() : IEnumerable<SinglyLinkedListNode<T>>
     {
         #region Properties & Fields.
         public SinglyLinkedListNode<T> Head { get; private set; }
@@ -18,7 +18,6 @@ namespace Source.Assignments.NewFolder
         public int Count { get => this.count(); }
         public bool IsEmpty => Head == null || Tail == null;
         #endregion
-
 
         #region Adding & Removing
         /// <summary>
@@ -34,20 +33,78 @@ namespace Source.Assignments.NewFolder
           
             // Optimized varients when I do not need to add at a given index.
             // Goal is to hopefully keep this method fast.
-            if (index is null || index == this.Count)
+            if (this.Count == 0)
             {
-                return this.AddAtTail();
+                return this.AddAtHead(value);
             }
-            else if (this.Count == 0)
+            else if (index is null || index == this.Count)
             {
-                return this.AddAtHead();
+                return this.AddAtTail(value);
             }
 
             SinglyLinkedListNode<T> newNode = new SinglyLinkedListNode<T>(value);
+
+            // Find the new index to add to.
+            int currentIndex = 0;
+            SinglyLinkedListNode<T> foundLocation = this.Head;
+            while (currentIndex < index - 1)
+            {
+                foundLocation = foundLocation.Right;
+                currentIndex++;
+            }
+
             return newNode;
         }
-        public SinglyLinkedListNode<T> AddAtHead() { throw new NotImplementedException(); }
-        public SinglyLinkedListNode<T> AddAtTail() { throw new NotImplementedException(); }
+
+
+        /// <summary>
+        /// Optimized method for inserting elements at the head of the list.
+        /// </summary>
+        /// <returns></returns>
+        public SinglyLinkedListNode<T> AddAtHead(T value)
+        {
+            SinglyLinkedListNode<T> newHead = new SinglyLinkedListNode<T>(value);
+            
+            if (IsEmpty)
+            {
+                this.Head = newHead;
+                this.Tail = newHead;
+            }
+            else
+            {
+                newHead.Right = this.Head;
+                this.Head = newHead;
+            }
+
+            return newHead;
+        }
+
+        /// <summary>
+        /// Optimized method for inserting elements at the list tail.
+        /// </summary>
+        /// <returns></returns>
+        public SinglyLinkedListNode<T> AddAtTail(T value) 
+        { 
+            SinglyLinkedListNode<T> newTail = new SinglyLinkedListNode<T>(value);
+
+            if (IsEmpty)
+            {
+                this.Tail = newTail;
+                this.Head = newTail;
+                return newTail;
+            }
+
+            if (this.Tail == this.Head)
+            {
+                this.Head.Right = newTail;
+                this.Tail = newTail;
+                return newTail;
+            }
+
+            this.Tail.Right = newTail;
+            this.Tail = newTail;
+            return newTail;
+        }
 
         public void Remove() { throw new NotImplementedException(); }
         public void RemoveAtHead() { throw new NotImplementedException(); }
@@ -57,14 +114,51 @@ namespace Source.Assignments.NewFolder
         #region Getters
         public bool Contains() { throw new NotImplementedException(); }
         public void FindNode() { throw new NotImplementedException(); }
+        public void GetAt() { throw new NotImplementedException(); }
 
         #endregion
 
         #region Misc
-        public void GetAt() { throw new NotImplementedException(); }
-        public void TourtisAndHair() { throw new NotImplementedException(); }
-        private int count() { throw new NotImplementedException(); }
-        private void IndexInRange(int index) { throw new NotImplementedException(); }
+        // I added these methods to make life easier while programming. These are not directly related to the assignment.
+
+        /// <summary>
+        /// Very simple implimentation of the TortoiseAndHare algorithm to find the midpoint. Note that if you need the
+        /// midpoint that you can also use (this.count / 2)
+        /// </summary>
+        /// <returns></returns>
+        public (SinglyLinkedListNode<T> fast, SinglyLinkedListNode<T> slow, int midPoint) TortoiseAndHare()
+        {
+            SinglyLinkedListNode<T> fast = this.Head;
+            SinglyLinkedListNode<T> slow = this.Head;
+            int midPoint = 0;
+            while (fast != null)
+            {
+                fast = fast.Right.Right;
+                slow = slow.Right;
+                midPoint++;
+            }
+
+            return (fast, slow, midPoint);
+        }
+        
+        /// <summary>
+        /// Counter method to sum the total nodes. 
+        /// </summary>
+        /// <returns></returns>
+        private int count()
+        {
+            int count = 0;
+            foreach (SinglyLinkedListNode<T> node in this) { count++; }
+            return count;
+        }
+
+        /// <summary>
+        /// Helper method to check if the index of a value is valid.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private bool IndexInRange(int index) => ((index > 0) && (index < this.Count)); 
+        
         #endregion
 
         #region Conversion
@@ -76,9 +170,17 @@ namespace Source.Assignments.NewFolder
         #endregion
 
         #region Interface Implimentation
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<SinglyLinkedListNode<T>> GetEnumerator()
         {
-            throw new NotImplementedException();
+            if (this.IsEmpty) { yield break; }
+
+            SinglyLinkedListNode<T> current = (SinglyLinkedListNode<T>)this.Head;
+
+            while (current != null)
+            {
+                yield return current;
+                current = current.Right;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
