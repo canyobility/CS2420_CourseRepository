@@ -108,10 +108,45 @@ namespace Source.Assignments.NewFolder
 
         public void RemoveFirst(T value) 
         {
-            SinglyLinkedListNode<T> Node;
-            bool nodeFound = this.TryFindFirstNodeOfValue(value, out Node);
+            if (this.Head is not null && this.Head.Value!.Equals(value))
+            {
+                this.RemoveAtHead();
+                return;
+            } 
 
+            SinglyLinkedListNode<T>? Node;
+            int? index;
+            bool nodeFound = this.TryFindFirstNodeOfValue(value, out Node, out index);
             if (nodeFound == false) { throw new KeyNotFoundException($"Cannot find a node of value {value}."); }
+            
+            // Less optimized than the insertion. I cannot guarantee the tail is the first appearance of a value without
+            // walking through the list beforehand.
+            if (Node.Value.Equals(this.Tail.Value))
+            {
+                this.RemoveAtTail();
+                return;
+            }
+
+            if (index is null)
+            { throw new Exception("This should never be reached. If it is, something significant has broke."); }
+
+            int currentPosition = 0;
+            SinglyLinkedListNode<T> current = this.Head;
+            while (currentPosition != index - 1)
+            {
+                currentPosition++;
+                current = current.Right;
+            }
+
+            SinglyLinkedListNode<T> leftNode = current;
+            SinglyLinkedListNode<T> nodeToRemove = current.Right;
+            SinglyLinkedListNode<T> rightNode= current.Right.Right;
+
+            leftNode.Right = rightNode;
+
+
+            Console.WriteLine($"Found Var: {current.Value}");
+
         }
         public void RemoveAtHead()
         {
@@ -140,22 +175,26 @@ namespace Source.Assignments.NewFolder
         /// <param name="value"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        public bool TryFindFirstNodeOfValue(T value, out SinglyLinkedListNode<T>? nodeOut) 
+        public bool TryFindFirstNodeOfValue(T value, out SinglyLinkedListNode<T>? nodeOut, out int? index) 
         {
             SinglyLinkedListNode<T> current = this.Head;
+            int counter = 0;
             while (current is not null)
             { 
                 // https://stackoverflow.com/questions/8982645/how-to-solve-operator-cannot-be-applied-to-operands-of-type-t-and-t
                 if (current.Value!.Equals(value))
                 {
                     nodeOut = current;
+                    index = counter;
                     return true;
                 }
 
                 current = current.Right;
+                counter++;
             }
 
             nodeOut = null;
+            index = null;
             return false;
         }
 
@@ -171,8 +210,9 @@ namespace Source.Assignments.NewFolder
         /// <returns></returns>
         public bool Contains(T value)
         {
-            SinglyLinkedListNode<T> temp = null;
-            return this.TryFindFirstNodeOfValue(value, out temp);
+            SinglyLinkedListNode<T> tempNode = null;
+            int? tempIndex = null;
+            return this.TryFindFirstNodeOfValue(value, out tempNode, out tempIndex);
         }
 
         #endregion

@@ -18,7 +18,7 @@ public class Program
             Console.WriteLine($"Results: {list.ToString()}");
 
             SinglyLinkedListNode<int> five;
-            bool found = list.TryFindFirstNodeOfValue(5, out five);
+            bool found = list.TryFindFirstNodeOfValue(5, out five, out int? foundIndex);
             Console.WriteLine($"Found node of value 5: {found}. Allocation: {five.ToString()}");
             Console.WriteLine($"Contains 15? {list.Contains(15)}");
 
