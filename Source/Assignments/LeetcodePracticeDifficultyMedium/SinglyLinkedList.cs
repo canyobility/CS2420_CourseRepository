@@ -106,6 +106,11 @@ namespace Source.Assignments.NewFolder
             return newTail;
         }
 
+        /// <summary>
+        /// Removes the first appearance of a value from the linked list, in the order it was first found.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="KeyNotFoundException">Thrown when T value could not be foudn in the array.</exception>
         public void RemoveFirst(T value) 
         {
             if (this.Head is not null && this.Head.Value!.Equals(value))
@@ -143,17 +148,27 @@ namespace Source.Assignments.NewFolder
             SinglyLinkedListNode<T> rightNode= current.Right.Right;
 
             leftNode.Right = rightNode;
-
-
-            Console.WriteLine($"Found Var: {current.Value}");
-
         }
+
+
+        /// <summary>
+        /// Removes the current head, replacing head with head.Right.
+        /// </summary>
         public void RemoveAtHead()
         {
             SinglyLinkedListNode<T> newHead = this.Head.Right;
             this.Head = null; // Would possibly want to impliment IDisposable on the nodes for removal.
             this.Head = newHead;
         }
+
+
+        /// <summary>
+        /// Trims the tail back one node node. Replaces the current tail with the previous node. 
+        /// 
+        /// <para>
+        /// Note: Due to the nature of a singly linked list, this method will always take O(n) time, and is not light.
+        /// </para>
+        /// </summary>
         public void RemoveAtTail()
         {
             SinglyLinkedListNode<T> current = this.Head;
