@@ -22,7 +22,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     /// </para>
     /// </remarks>
     /// <typeparam name="T"></typeparam>
-    public class SinglyLinkedListNode<T>
+    public class SinglyLinkedListNode<T> : IEquatable<SinglyLinkedListNode<T>>
     {
         public T Value { get; set; }
         private SinglyLinkedListNode<T> right;
@@ -57,6 +57,14 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             this.right = nodeToConnect;
         }
 
+
+
+        // Attempt to resolve inequality operations
+        // This is my first time overloading the equality operators, and although I have read through the doucmentation extensively, 
+        // I do want to note this may not be the "best" way to approach this problem. Or, if this is a good design.
+        public bool Equals(T var) => this.Value.Equals(var);
+        public bool Equals(SinglyLinkedListNode<T>? other) => (this.Value.Equals(other.Value));
+        
     }
 
 

@@ -106,14 +106,58 @@ namespace Source.Assignments.NewFolder
             return newTail;
         }
 
-        public void Remove() { throw new NotImplementedException(); }
+        public void RemoveFirst(T value) 
+        {
+            SinglyLinkedListNode<T> Node;
+            bool nodeFound = this.TryFindFirstNodeOfValue(value, out Node);
+
+            if (nodeFound == false) { throw new KeyNotFoundException($"Cannot find a node of value {value}."); }
+        }
         public void RemoveAtHead() { throw new NotImplementedException(); }
         public void RemoveAtTail() { throw new NotImplementedException(); }
         #endregion
 
-        #region Getters
-        public bool Contains() { throw new NotImplementedException(); }
-        public void FindNode() { throw new NotImplementedException(); }
+        #region Getters        
+        /// <summary>
+        /// This method is used to try to find the first node in the list which shares a specified value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public bool TryFindFirstNodeOfValue(T value, out SinglyLinkedListNode<T>? nodeOut) 
+        {
+            SinglyLinkedListNode<T> current = this.Head;
+            while (current is not null)
+            { 
+                // https://stackoverflow.com/questions/8982645/how-to-solve-operator-cannot-be-applied-to-operands-of-type-t-and-t
+                if (current.Value!.Equals(value))
+                {
+                    nodeOut = current;
+                    return true;
+                }
+
+                current = current.Right;
+            }
+
+            nodeOut = null;
+            return false;
+        }
+
+        /// <summary>
+        /// TODO: This is probably not the proper way to do this. At the very least revisit the docstring.
+        /// 
+        /// <para>
+        /// Overload of the TryFindFirstNodeOfValue(T value<T>? nodeOut) method which does not need to return the found
+        /// node.
+        /// </para>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool Contains(T value)
+        {
+            SinglyLinkedListNode<T> temp = null;
+            return this.TryFindFirstNodeOfValue(value, out temp);
+        }
         public void GetAt() { throw new NotImplementedException(); }
 
         #endregion
