@@ -113,8 +113,24 @@ namespace Source.Assignments.NewFolder
 
             if (nodeFound == false) { throw new KeyNotFoundException($"Cannot find a node of value {value}."); }
         }
-        public void RemoveAtHead() { throw new NotImplementedException(); }
-        public void RemoveAtTail() { throw new NotImplementedException(); }
+        public void RemoveAtHead()
+        {
+            SinglyLinkedListNode<T> newHead = this.Head.Right;
+            this.Head = null; // Would possibly want to impliment IDisposable on the nodes for removal.
+            this.Head = newHead;
+        }
+        public void RemoveAtTail()
+        {
+            SinglyLinkedListNode<T> current = this.Head;
+
+            while (current.Right.Right is not null)
+            {
+                current = current.Right;
+            }
+
+            current.Right = null;
+            this.Tail = current;
+        }
         #endregion
 
         #region Getters        
@@ -158,7 +174,6 @@ namespace Source.Assignments.NewFolder
             SinglyLinkedListNode<T> temp = null;
             return this.TryFindFirstNodeOfValue(value, out temp);
         }
-        public void GetAt() { throw new NotImplementedException(); }
 
         #endregion
 
@@ -206,11 +221,59 @@ namespace Source.Assignments.NewFolder
         #endregion
 
         #region Conversion
-        // Realize these are extra, though they are not very hard to add.
-        public override string ToString() { throw new NotImplementedException(); }
-        public T[] ToArray() { throw new NotImplementedException(); }
-        public List<T> ToList() { throw new NotImplementedException(); }
-        
+        // Realize these are extra, though, I figure they are very useful for keeping this class easy to use in the
+        // future. If, I use them in the future, anyway.
+
+
+        // Visual Studio previews classes as their string representation while debugging; this makes that easier to
+        // quickly preview changes.
+        public override string ToString() 
+        {
+            string stringOut = string.Empty;
+
+            foreach (SinglyLinkedListNode<T> node in this)
+            {
+                stringOut += $"{node.Value}, ";
+            }
+
+            return $"({stringOut.Substring(0, stringOut.Length - 2)})";
+        }
+
+        /// <summary>
+        /// Converts the linked list to an array format.
+        /// </summary>
+        /// <returns></returns>
+        public T[] ToArray() 
+        {
+            int countCache = this.Count;
+            SinglyLinkedListNode<T> current = this.Head;
+            T[] array = new T[countCache];
+            for (int i = 0; i < countCache; i++)
+            {
+                array[i] = current.Value;
+                current = current.Right;
+            }
+
+            return array;
+        }
+
+
+        /// <summary>
+        /// Converts the linked list to the C# built-in list format.
+        /// </summary>
+        /// <returns></returns>
+        public List<T> ToList()
+        {
+            SinglyLinkedListNode<T> current = this.Head;
+            List<T> listOut = new List<T>();
+
+            foreach (SinglyLinkedListNode<T> node in this)
+            {
+                listOut.Add(node.Value);
+            }
+
+            return listOut;
+        }
         #endregion
 
         #region Interface Implimentation

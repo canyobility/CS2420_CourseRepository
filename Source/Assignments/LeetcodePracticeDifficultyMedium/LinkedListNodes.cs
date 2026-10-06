@@ -29,7 +29,9 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         public SinglyLinkedListNode<T> Right 
         {
             get { return this.right;  }
-            set { connect(value); } 
+            set { 
+                connect(value); 
+            } 
         }
         public bool Connected => (this.right is not null);
         public Guid NodeID { get; init; }
@@ -49,6 +51,12 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         /// <exception cref="RecursiveNodeConnectionException"></exception>
         private void connect(SinglyLinkedListNode<T> nodeToConnect)
         { 
+            if (nodeToConnect is null)
+            {
+                this.right = null;
+                return;
+            }
+
             if (nodeToConnect.NodeID == this.NodeID)
             {
                 throw new RecursiveNodeConnectionException($"Attempted to connect node this to itself. ID: {this.NodeID} ");

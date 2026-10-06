@@ -15,18 +15,17 @@ public class Program
             Console.WriteLine($"Inserting 3: {list.Add(3)}");
             Console.WriteLine($"Inserting 5 at head: {list.AddAtHead(5)}");
             Console.WriteLine($"Inserting 10 at Tail: {list.AddAtTail(10)}");
-
-            Console.WriteLine("Results: ");
-            foreach (SinglyLinkedListNode<int> node in list)
-            {
-                Console.Write($"{node.Value}, ");
-            }
+            Console.WriteLine($"Results: {list.ToString()}");
 
             SinglyLinkedListNode<int> five;
             bool found = list.TryFindFirstNodeOfValue(5, out five);
-
             Console.WriteLine($"Found node of value 5: {found}. Allocation: {five.ToString()}");
             Console.WriteLine($"Contains 15? {list.Contains(15)}");
+
+            list.RemoveAtHead();
+            list.RemoveAtTail();
+
+            Console.WriteLine($"Trimmed List: {list.ToString()}");
         }
 
         Debug();
