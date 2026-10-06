@@ -24,6 +24,7 @@ public class Program
 
             list.RemoveAtHead();
             list.RemoveAtTail();
+            list.RemoveFirst(2);
 
             Console.WriteLine($"Trimmed List: {list.ToString()}");
         }

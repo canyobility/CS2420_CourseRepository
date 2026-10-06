@@ -33,7 +33,7 @@ namespace Source.Assignments.NewFolder
           
             // Optimized varients when I do not need to add at a given index.
             // Goal is to hopefully keep this method fast.
-            if (this.Count == 0)
+            if (this.IsEmpty)
             {
                 return this.AddAtHead(value);
             }
