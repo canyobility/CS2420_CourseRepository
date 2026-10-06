@@ -22,47 +22,17 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     /// </para>
     /// </remarks>
     /// <typeparam name="T"></typeparam>
-    public class SinglyLinkedListNode<T> : IEquatable<SinglyLinkedListNode<T>>
+    /// 
+
+    public abstract class LinkedListNode<T> : IEquatable<LinkedListNode<T>>
     {
         public T Value { get; set; }
-        private SinglyLinkedListNode<T> right;
-        public SinglyLinkedListNode<T> Right 
-        {
-            get { return this.right;  }
-            set { 
-                connect(value); 
-            } 
-        }
-        public bool Connected => (this.right is not null);
         public Guid NodeID { get; init; }
 
-        public SinglyLinkedListNode(T value)
+        public LinkedListNode(T value)
         {
             NodeID = Guid.NewGuid();
             Value = value;
-        }
-
-        /// <summary>
-        /// Connects a node to another node. 
-        /// 
-        /// Added this as a safeguard to help prevent the code from getting stuck in a circular loop. 
-        /// </summary>
-        /// <param name="nodeToConnect"></param>
-        /// <exception cref="RecursiveNodeConnectionException"></exception>
-        private void connect(SinglyLinkedListNode<T> nodeToConnect)
-        { 
-            if (nodeToConnect is null)
-            {
-                this.right = null;
-                return;
-            }
-
-            if (nodeToConnect.NodeID == this.NodeID)
-            {
-                throw new RecursiveNodeConnectionException($"Attempted to connect node this to itself. ID: {this.NodeID} ");
-            }
-
-            this.right = nodeToConnect;
         }
 
 
@@ -71,10 +41,55 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         // This is my first time overloading the equality operators, and although I have read through the doucmentation extensively, 
         // I do want to note this may not be the "best" way to approach this problem. Or, if this is a good design.
         public bool Equals(T var) => this.Value.Equals(var);
-        public bool Equals(SinglyLinkedListNode<T>? other) => (this.Value.Equals(other.Value));
-        
+        public bool Equals(LinkedListNode<T>? other) => (this.Value.Equals(other.Value));
     }
 
+    public class SinglyLinkedListNode<T> : LinkedListNode<T>
+    {
+        private SinglyLinkedListNode<T> right;
+        public SinglyLinkedListNode<T> Right
+        {
+            get { return this.right; }
+            set
+            {
+                connect(value);
+            }
+        }
+        public bool Connected => (this.right is not null);
+
+        public SinglyLinkedListNode(T value) : base(value) 
+        {    }
+
+
+        /// <summary>
+        /// Connects a node to another node. 
+        /// 
+        /// Added this as a safeguard to help prevent the code from getting stuck in a circular loop. 
+        /// </summary>
+        /// <param name="nodeToConnect"></param>
+        /// <exception cref="RecursiveNodeConnectionException"></exception>
+        private void connect(LinkedListNode<T> nodeToConnect)
+        {
+            if (nodeToConnect is null)
+            {
+                this.right = null;
+                return;
+            }
+            else if (nodeToConnect is not SinglyLinkedListNode<T>)
+            {
+                throw new ArgumentException("Attempted to connect this, SinglyLinkedListNode<T> to a non singlyLinkedListNode<T> type.");
+            }
+
+            if (nodeToConnect.NodeID == this.NodeID)
+            {
+                throw new RecursiveNodeConnectionException($"Attempted to connect node this to itself. ID: {this.NodeID} ");
+            }
+
+
+            this.right = (SinglyLinkedListNode<T>)nodeToConnect;
+        }
+
+    }
 
     [Serializable]
     public class RecursiveNodeConnectionException : Exception

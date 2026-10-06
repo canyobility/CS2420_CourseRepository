@@ -7,8 +7,24 @@ using System.Text;
 namespace Source.Assignments.NewFolder
 {
     /// <summary>
-    /// Custom implimentation of a generic singly linked list class. 
+    /// Simple Singly Linked List implimentation.
     /// </summary>
+    /// 
+    /// <remarks>
+    /// Much simplified version of my planned SinglyLinkedList class for this submission, rewritten in ~6 or so hours.
+    /// 
+    /// <para>
+    /// I attached some additional logic to the base linked list to either make this easier to work with, or be more or
+    /// less useful as a proper datastructure. This includes the implimentation of the IENumerable interface, conversion
+    /// methods, and the TortoiseAndHare algorithm.
+    /// </para>
+    /// 
+    /// <para>
+    /// Few things to note with this implimentation: 
+    /// - Count is not a stored value. It is computed on the fly, with each computation taking a time complexity of O(n).
+    /// - I have not tested a large amount of this file. There may be some bugs. 
+    /// </para>
+    /// </remarks>
     /// <typeparam name="T"></typeparam>
     public class SinglyLinkedList<T>() : IEnumerable<SinglyLinkedListNode<T>>
     {
