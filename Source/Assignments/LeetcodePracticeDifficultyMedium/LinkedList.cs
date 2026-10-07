@@ -32,23 +32,36 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         }
 
 
+        /// <summary>
+        /// 10/07/2026. 
+        /// 
+        /// A method which reverses the singly linked list.
+        /// </summary>
+        /// <param name="partition"></param>
         public void DestructiveReverse(int partition = 0)
         {
             partition = (IndexInRange(partition)) ? partition : count;
 
-            LinkedListNode<T>? previous = null;
-            LinkedListNode<T> current = this.head;
-
-            while (current is not null)
+            void Reverse(LinkedListNode<T> min, LinkedListNode<T> max)
             {
-                LinkedListNode<T> temp = current.next;
+                LinkedListNode<T>? previous = null;
+                LinkedListNode<T> current = min;
 
-                current.next = previous;
-                previous = current;
-                current = temp;
+                while (current != max)
+                {
+                    LinkedListNode<T> temp = current.next;
+
+                    current.next = previous;
+                    previous = current;
+                    current = temp;
+                }
+
+                this.head = previous;
             }
 
-            this.head = previous;
+            LinkedListNode<T> temp = this.head.next.next.next;
+            Reverse(this.head, this.head.next.next.next);
+            this.head.next.next.next = temp;
         }
 
         #region Utilitys
