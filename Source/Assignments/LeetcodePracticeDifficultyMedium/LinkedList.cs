@@ -14,7 +14,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         {
             LinkedListNode<T> newNode = new LinkedListNode<T>(value);
 
-            if (head is null)
+            if (count == 0)
             {
                 this.head = newNode;
             }   
@@ -39,7 +39,8 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             LinkedListNode<T> current = this.head;
             while (current is not null)
             {
-                output = $"{current.Value}, ";
+                output = output + $"{current.Value}, ";
+                current = current.next;
             }
 
             return $"({output.Substring(0, output.Length - 2)})";
