@@ -10,6 +10,23 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         public int count { get; private set; }
 
 
+        // https://learn.microsoft.com/en-us/visualstudio/ide/reference/generate-xml-documentation-comments?view=visualstudio
+        /// <summary>
+        /// Adds a new node to the end of the linked list.
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// Complexity: 
+        /// 
+        /// <list type="bullet">
+        ///     <item> Empty List | Time: O(1) Space: TimeO(1) |</item>
+        /// 
+        /// </list>
+        /// 
+        /// 
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public LinkedListNode<T> Append(T value)
         {
             LinkedListNode<T> newNode = new LinkedListNode<T>(value);
