@@ -24,7 +24,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     /// <typeparam name="T"></typeparam>
     public class LinkedListNode<T> : Node<T>
     {
-        public LinkedListNode<T>? next { get; private set; }
+        public LinkedListNode<T>? next { get; set; }
         public bool Connected => (next is null);
         public LinkedListNode(T value) : base(value) { }
 
