@@ -13,3 +13,8 @@ have also attached a date for quick lookups. I may revise this setup to a deeper
 everything organized. 
 
 I have attached a README in each of the submissions folders. 
+
+The master program.cs file is only a simple selector utility, the code for each of my submissions are going to be stored
+in their own files in the assignments folder. This is to keep everything in one place. 
+
+To select, 

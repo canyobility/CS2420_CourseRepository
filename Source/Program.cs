@@ -1,52 +1,38 @@
-﻿using Source.Assignments.LeetcodePracticeDifficultyMedium;
-using Source.Assignments.LeetcodePracticeDifficultyMedium.V1;
+﻿using System;
+using System.Collections.Generic;
+using Source.Assignments.LeetcodePracticeDifficultyMedium;
+using System.Security.Cryptography.X509Certificates;
 
 public class Program
 {
-    private static void LeetCodePracticeDifficultyMedium()
+   public static Dictionary<string, Action> callbacks = new Dictionary<string, Action>();
+    private static void InitalizeCallbacks()
     {
-        SinglyLinkedList<int> list = new SinglyLinkedList<int>();
-        DoublyLinkedList<int> list2 = new DoublyLinkedList<int>();
-
-        // Suppliment for proper unit tests.
-        void SinglyLinked()
-        {
-            Console.WriteLine();
-            //Console.WriteLine($"Inserting 1: {list.Add(1)}");
-            //Console.WriteLine($"Inserting 2: {list.Add(2)}");
-            //Console.WriteLine($"Inserting 3: {list.Add(3)}");
-            //Console.WriteLine($"Inserting 5 at head: {list.AddAtHead(5)}");
-            //Console.WriteLine($"Inserting 10 at Tail: {list.AddAtTail(10)}");
-            //Console.WriteLine($"Results: {list.ToString()}");
-
-            //SinglyLinkedListNode<int> five;
-            //bool found = list.TryFindFirstNodeOfValue(5, out five, out int? foundIndex);
-            //Console.WriteLine($"Found node of value 5: {found}. Allocation: {five.ToString()}");
-            //Console.WriteLine($"Contains 15? {list.Contains(15)}");
-
-            //list.RemoveAtHead();
-            //list.RemoveAtTail();
-            //list.RemoveFirst(2);
-
-            //Console.WriteLine($"Trimmed List: {list.ToString()}");
-        }
-
-        void DoublyLinked()
-        {
-            Console.WriteLine($"Inserting 1: {list2.Add(1)}");
-            Console.WriteLine($"Inserting 2: {list2.Add(2)}");
-            Console.WriteLine($"Inserting 3: {list2.Add(3)}");
-            Console.WriteLine($"Inserting 5 at head: {list2.AddAtHead(5)}");
-            Console.WriteLine($"Inserting 10 at Tail: {list2.AddAtTail(10)}");
-            Console.WriteLine($"Results: {list2.ToString()}");
-        }
-
-        DoublyLinked();
+        callbacks["ltpcm"] = () => Submission_ITPCM.Main(new string[0]);
     }
 
+    /// <summary>
+    /// Provided for quality of life. Will be updated to the key of the most recent submission. 
+    /// </summary>
+    /// <returns></returns>
+    private static string GetCurrent() => "ltpcm";
 
-    public static void Main()
+    public static void Main(string[] args)
     {
-        LeetCodePracticeDifficultyMedium();
+        args = (args.Count() is 0) ? new string[1] { GetCurrent() } : args;
+        string submissionID = args[0].ToLower().Trim();
+
+
+        InitalizeCallbacks(); 
+
+        if (callbacks.ContainsKey(submissionID))
+        {
+            Console.WriteLine($"Executing command for submission {submissionID}");
+            callbacks[submissionID]();
+        }
+        else
+        {
+            throw new ArgumentException($"Expected command ID was not reconized. Got {submissionID}");
+        }
     }
 }
