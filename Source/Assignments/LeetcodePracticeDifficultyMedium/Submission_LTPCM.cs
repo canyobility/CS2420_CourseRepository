@@ -59,6 +59,19 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         }
 
 
+        /// <summary>
+        /// Implementation of problem 2.    
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// <b>Part 1 Constraints: </b>
+        /// Target Time: O(n) Target Space: O(1)
+        /// <list type="bullet">
+        ///     <item> 0 &lt;= number of nodes &gt;= 500 </item>
+        ///     <item>1 0 &lt;= k &gt;= 2 * 10^9 </item>
+        ///     <item> -100 &lt;= Node.val &gt;= 100 </item>
+        /// </list>
+        /// </remarks>
         private static void Problem2()
         {
             int[] example1 = new int[] { 1, 2, 3, 4, 5};
@@ -83,6 +96,9 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             Console.WriteLine($"Linked List 2 contents: {linkedList2.ToString()}");
             Console.WriteLine($"Linked List 3 contents: {linkedList3.ToString()}");
 
+            linkedList1.Rotate(2);
+            linkedList2.Rotate(4);
+            linkedList3.Rotate(0);
         }
         #endregion
     }
