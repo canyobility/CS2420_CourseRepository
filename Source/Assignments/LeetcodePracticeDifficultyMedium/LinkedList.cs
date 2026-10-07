@@ -30,5 +30,19 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             this.count++;
             return newNode;
         }
+
+
+        public override string ToString()
+        {
+            string output = string.Empty;
+
+            LinkedListNode<T> current = this.head;
+            while (current is not null)
+            {
+                output = $"{current.Value}, ";
+            }
+
+            return $"({output.Substring(0, output.Length - 2)})";
+        }
     }
 }
