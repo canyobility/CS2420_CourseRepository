@@ -12,7 +12,11 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         {
             Console.WriteLine("Problem 1 [" + new string('=', Console.WindowWidth - 11));
             Problem1();
-            
+
+            Console.WriteLine("\n\n");
+            Console.WriteLine("Problem 2 [" + new string('=', Console.WindowWidth - 11));
+            Problem2();
+
         }
 
         #endregion
@@ -52,6 +56,33 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
 
             Console.WriteLine($"Linked List 1 contents (Reversed at k=3): {linkedList1.ToString()}");
             Console.WriteLine($"Linked List 2 contents (Reversed at k=2): {linkedList2.ToString()}");
+        }
+
+
+        private static void Problem2()
+        {
+            int[] example1 = new int[] { 1, 2, 3, 4, 5};
+            int[] example2 = new int[] { 1, 2, 3};
+            int[] example3 = new int[] { 7, 2 };
+            
+            DoublyLinkedList<int> linkedList1 = new DoublyLinkedList<int>();
+            DoublyLinkedList<int> linkedList2 = new DoublyLinkedList<int>();
+            DoublyLinkedList<int> linkedList3 = new DoublyLinkedList<int>();
+
+            // TODO: These should be in their own method.
+            foreach (int n in example1)
+                linkedList1.Append(n);
+
+            foreach (int n in example2)
+                linkedList2.Append(n);
+
+            foreach (int n in example3)
+                linkedList3.Append(n);
+
+            Console.WriteLine($"Linked List 1 contents: {linkedList1.ToString()}");
+            Console.WriteLine($"Linked List 2 contents: {linkedList2.ToString()}");
+            Console.WriteLine($"Linked List 3 contents: {linkedList3.ToString()}");
+
         }
         #endregion
     }

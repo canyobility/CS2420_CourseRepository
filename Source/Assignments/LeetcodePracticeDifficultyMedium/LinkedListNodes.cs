@@ -37,8 +37,8 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     /// <typeparam name="T"></typeparam>
     public class DoublyLinkedListNode<T> : Node<T>
     {
-        public DoublyLinkedListNode<T> next { get; private set; }
-        public DoublyLinkedListNode<T> previous { get; private set; }
+        public DoublyLinkedListNode<T> next { get; set; }
+        public DoublyLinkedListNode<T> previous { get; set; }
 
         /// <summary>
         /// A readonly property which indicates the current connectivity status of a given node>
