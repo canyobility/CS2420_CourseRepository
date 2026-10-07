@@ -19,6 +19,9 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             }
 
             Console.WriteLine($"Linked List 1 contents: {linkedList1.ToString()}");
+            linkedList1.DestructiveReverse(3);
+            Console.WriteLine($"Linked List 1 contents (Reversed): {linkedList1.ToString()}");
+            
         }
     }
 }
