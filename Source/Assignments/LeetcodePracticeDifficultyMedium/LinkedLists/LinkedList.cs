@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Source.Assignments.LeetcodePracticeDifficultyMedium
+namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
 {
-    public class SinglyLinkedList<T>
+    public class SinglyLinkedList<T> : LinkedListShared
     {
         public LinkedListNode<T> head;
-        public int count { get; private set; }
 
 
         // https://learn.microsoft.com/en-us/visualstudio/ide/reference/generate-xml-documentation-comments?view=visualstudio
@@ -20,13 +19,11 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         /// 
         /// <list type="bullet">
         ///     <item> Empty List | Time: O(1) Space: TimeO(1) |</item>
-        /// 
+        ///     <item> Full list (count != 0) | Time: O(n) Space: TimeO(1) |</item>
         /// </list>
-        /// 
-        /// 
         /// </remarks>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">The value to insert into the list.</param>
+        /// <returns>Created Linked List node.</returns>
         public LinkedListNode<T> Append(T value)
         {
             LinkedListNode<T> newNode = new LinkedListNode<T>(value);
@@ -105,7 +102,6 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
 
 
         #region Utilitys
-        protected bool IndexInRange(int index) => (index > 0) && (index < count);
         public override string ToString()
         {
             string output = string.Empty;
