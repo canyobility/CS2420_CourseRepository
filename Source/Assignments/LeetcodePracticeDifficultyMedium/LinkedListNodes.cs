@@ -8,7 +8,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     /// Node base class. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class  Node<T>
+    public abstract class Node<T>
     {
         public T Value { get; set; }
         public Node(T value)
