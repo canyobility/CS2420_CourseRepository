@@ -8,7 +8,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Problem 1 [" + new string('=', Console.WindowWidth - 11));
         }
     }
 }
