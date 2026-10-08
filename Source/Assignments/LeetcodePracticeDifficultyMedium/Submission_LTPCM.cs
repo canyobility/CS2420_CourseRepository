@@ -76,7 +76,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         {
             int[] example1 = new int[] { 1, 2, 3, 4, 5};
             int[] example2 = new int[] { 1, 2, 3};
-            int[] example3 = new int[] { 7, 2 };
+            int[] example3 = new int[] { 7, 8 };
             
             DoublyLinkedList<int> linkedList1 = new DoublyLinkedList<int>();
             DoublyLinkedList<int> linkedList2 = new DoublyLinkedList<int>();
