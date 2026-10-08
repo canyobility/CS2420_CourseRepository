@@ -127,6 +127,15 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         {
             int[] prices1 = new int[] {8, 4, 6, 2, 3 };
             int[] prices2 = new int[] {1, 2, 1, -1, -1 };
+
+            StockPriceMinimimCalculator calculator1 = new StockPriceMinimimCalculator(prices1);
+            StockPriceMinimimCalculator calculator2 = new StockPriceMinimimCalculator(prices2);
+
+            Console.WriteLine("Prices 1 Array: 8, 4, 6, 2, 3");
+            Console.WriteLine($"     - OUT: {calculator1.FindNextDiscounted(0).PreviewArrayAsString()}");
+
+
+            Console.WriteLine("Prices 2 Array: 1, 2, 1, -1, -1");
         }
         #endregion
     }
