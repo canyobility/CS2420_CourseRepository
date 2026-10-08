@@ -37,6 +37,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
                     current = current.next;
 
                 current.next = newNode;
+                newNode.previous = this.tail;
                 this.tail = newNode;
             }
 
@@ -51,21 +52,26 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
         /// <param name="rotations"></param>
         public void Rotate(int rotations)
         {
-            while (rotations > 0)
+            while (rotations >= 0)
             {
                 DoublyLinkedListNode<T> head = this.head;
                 DoublyLinkedListNode<T> tail = this.tail;
                 DoublyLinkedListNode<T> temp1 = head;
 
-                tail.previous = head;
-                tail.next = temp1;
+                this.head = head.next;
 
+                temp1.next = null;
+                temp1.previous = this.tail;
+
+                this.tail.next = temp1;
+                this.tail = temp1;
 
                 rotations--;
             }
         }
 
 
+        // Visualize connections, amkes debugging easier.
         public override string ToString()
         {
             string GetConnection(DoublyLinkedListNode<T> node)
