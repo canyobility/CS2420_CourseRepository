@@ -17,6 +17,10 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             Console.WriteLine("Problem 2 [" + new string('=', Console.WindowWidth - 11));
             Problem2();
 
+            Console.WriteLine("\n\n");
+            Console.WriteLine("Problem 3 [" + new string('=', Console.WindowWidth - 11));
+            Problem3();
+
         }
 
         #endregion
@@ -104,6 +108,25 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             Console.WriteLine($"Linked List 2 Rotated by factor of 4: {linkedList2.ToString()}");
             Console.WriteLine($"Linked List 3 Rotated by factor of 0: {linkedList3.ToString()}");
 
+        }
+
+
+        /// <summary>
+        /// Implementation of problem 3.    
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// <b>Part 1 Constraints: </b>
+        /// Target Time: O(n) Target Space: O(n)
+        /// <list type="bullet">
+        ///     <item> 1 &lt;= prices.length &gt;= 10^5 </item>
+        ///     <item> 1 &lt;= prices[i] &gt;= 10^9 </item>
+        /// </list>
+        /// </remarks>
+        private static void Problem3()
+        {
+            int[] prices1 = new int[] {8, 4, 6, 2, 3 };
+            int[] prices2 = new int[] {1, 2, 1, -1, -1 };
         }
         #endregion
     }
