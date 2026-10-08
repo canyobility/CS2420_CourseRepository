@@ -63,21 +63,23 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             }
         }
 
-        /// <summary>
-        /// Represents all possible connection states of a doubly linked list node.
-        /// </summary>
-        public enum Leaning 
-        {
-            /// <summary> Node is not connected. </summary>
-            NotConnected,
-            /// <summary> Node is connected on the left, and right.</summary>
-            Connected,
-            /// <summary> Node.Left is connected. Node.Right is null.</summary>
-            ConnectedLeft,
-            /// <summary> Node.Left is null. Node.Right is connected.</summary>
-            ConnectedRight,
-        }
+
         public DoublyLinkedListNode(T value) : base(value) { }
+    }
+
+    /// <summary>
+    /// Represents all possible connection states of a doubly linked list node.
+    /// </summary>
+    public enum Leaning
+    {
+        /// <summary> Node is not connected. </summary>
+        NotConnected,
+        /// <summary> Node is connected on the left, and right.</summary>
+        Connected,
+        /// <summary> Node.Left is connected. Node.Right is null.</summary>
+        ConnectedLeft,
+        /// <summary> Node.Left is null. Node.Right is connected.</summary>
+        ConnectedRight,
     }
 
 }

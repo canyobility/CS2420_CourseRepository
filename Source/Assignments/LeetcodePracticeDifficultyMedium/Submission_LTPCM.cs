@@ -99,6 +99,11 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             linkedList1.Rotate(2);
             linkedList2.Rotate(4);
             linkedList3.Rotate(0);
+
+            Console.WriteLine($"Linked List 1 Rotated by factor of 2: {linkedList1.ToString()}");
+            Console.WriteLine($"Linked List 2 Rotated by factor of 4: {linkedList2.ToString()}");
+            Console.WriteLine($"Linked List 3 Rotated by factor of 0: {linkedList3.ToString()}");
+
         }
         #endregion
     }

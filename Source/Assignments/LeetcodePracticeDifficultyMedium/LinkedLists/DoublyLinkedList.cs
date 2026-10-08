@@ -19,11 +19,8 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
         DoublyLinkedListNode<T> tail;
         int count;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        // TODO: Ideally get this to work. 
+        /// <inheritdoc cfref = "SinglyLinkedList.Insert(T Value)"/>
         public DoublyLinkedListNode<T> Append(T value)
         {
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(value);
@@ -31,6 +28,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
             if (count == 0)
             {
                 this.head = newNode;
+                this.tail = newNode;
             }
             else
             {
@@ -39,16 +37,50 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
                     current = current.next;
 
                 current.next = newNode;
+                this.tail = newNode;
             }
 
             this.count++;
             return newNode;
         }
-        public void Rotate(int rotations) => throw new NotImplementedException();
+        
+        
+        /// <summary>
+        /// Method which rotates the linked list.
+        /// </summary>
+        /// <param name="rotations"></param>
+        public void Rotate(int rotations)
+        {
+            while (rotations > 0)
+            {
+                DoublyLinkedListNode<T> head = this.head;
+                DoublyLinkedListNode<T> tail = this.tail;
+                DoublyLinkedListNode<T> temp1 = head;
+
+                tail.previous = head;
+                tail.next = temp1;
+
+
+                rotations--;
+            }
+        }
 
 
         public override string ToString()
         {
+            string GetConnection(DoublyLinkedListNode<T> node)
+            {
+                // Note: 
+                switch(node.ConnectionLeaning)
+                {
+                    case (Leaning.ConnectedLeft): return "<";
+                    case (Leaning.ConnectedRight): return ">";
+                    case (Leaning.Connected): return "<->";
+                    default: return "!";
+                }
+            }
+
+
             string output = string.Empty;
             int maxRecursiveDepth = count + (count / 2); // Anything more than this generally would only occur from a circular loop.
 
@@ -56,7 +88,7 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium.LinkedLists
             while (current is not null)
             {
                 maxRecursiveDepth--;
-                output = output + $"{current.Value}, ";
+                output = output + $"{current.Value} {GetConnection(current)} ";
                 current = current.next;
 
                 if (maxRecursiveDepth == 0)
