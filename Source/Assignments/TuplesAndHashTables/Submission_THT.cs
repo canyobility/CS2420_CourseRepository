@@ -102,8 +102,23 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         // B3: Return the names that are on BOTH lists. Use a HashSet.
         static HashSet<string> CommonNames(string[] first, string[] second)
         {
-            // TODO
-            return new HashSet<string>();
+            HashSet<string> populateSet(string[] names)
+            {
+                HashSet<string> setOut = new HashSet<string>();
+                foreach (string name in names)
+                {
+                    setOut.Add(name);
+                }
+
+                return setOut;
+            }
+
+            HashSet<string> setA = populateSet(first);
+            HashSet<string> setB = populateSet(second);
+
+            setA.IntersectWith(setB);
+
+            return setA;
         }
     }
 
