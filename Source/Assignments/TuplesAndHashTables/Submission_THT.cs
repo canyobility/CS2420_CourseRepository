@@ -56,8 +56,8 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
             {
                 average += score;
 
-                minimum = (score < minimum) ? minimum : score;
-                maximum = (score > maximum) ? maximum : score;
+                minimum = (score > minimum) ? minimum : score;
+                maximum = (score < maximum) ? maximum : score;
             }
 
             average = average / scores.Count();
@@ -224,27 +224,89 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
    Line 5: 2
 
    Why do Line 4 and Line 5 act differently? (2 or 3 sentences)
+   
+   Line 4 writes d.tag, which is a string, while line 5 prints an int value, being the 
+   number of elements in list Scores.  
+    
+    var d = Tag: "Lab" => string("lab")
+            Scores: new List<int> { 70, 80 } => int (list.Count())
 
+    I suspect I may be misunderstanding this question, please let me know if this answer is
+    incorrect / not what your looking for. 
 */
 
 /* ======================= B1: HASH TABLE BY HAND =======================
    (a) Chaining. Example: 3: apple -> plum -> null
 
-   0:
-   1:
-   2:
-   3:
-   4:
-   5:
-   6:
+   0: null
+   1: null
+   2: null
+   3: null
+   4: null
+   5: null
+   6: null
+
+   Insert("apple")
+   0: null
+   1: null
+   2: null
+   3: "Apple"
+   4: null
+   5: null
+   6: null
+
+   Insert("plum")
+   0: null
+   1: null
+   2: null
+   3: Tree (Red/black or AVL) (apple => plum)
+   4: null
+   5: null
+   6: null
+
+   Insert(null)
+   0: null
+   1: null
+   2: null
+   3: Tree (Red/black or AVL) (apple => plum)
+   4: null
+   5: null
+   6: null
 
    (b) Linear probing. Write the key in each slot, or "empty".
 
-   slot 0:
-   slot 1:
-   slot 2:
-   slot 3:
-   slot 4:
-   slot 5:
-   slot 6:
+   slot 0: "empty"
+   slot 1: "empty"
+   slot 2: "empty"
+   slot 3: "empty"
+   slot 4: "empty"
+   slot 5: "empty"
+   slot 6: "empty"
+
+   Insert("apple")
+   slot 0: "empty"
+   slot 1: "empty"
+   slot 2: "empty"
+   slot 3: "apple"
+   slot 4: "empty"
+   slot 5: "empty"
+   slot 6: "empty"
+
+   Insert("plum")
+   slot 0: "empty"
+   slot 1: "empty"
+   slot 2: "empty"
+   slot 3: "apple"
+   slot 4: "plum"
+   slot 5: "empty"
+   slot 6: "empty"
+
+   Insert(null) // Nothing to insert. 
+   slot 0: "empty"
+   slot 1: "empty"
+   slot 2: "empty"
+   slot 3: "apple"
+   slot 4: "plum"
+   slot 5: "empty"
+   slot 6: "empty"
 */
