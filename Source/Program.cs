@@ -20,6 +20,7 @@ public class Program
 
     public static void Main(string[] args)
     {
+        Console.WriteLine(args[0]);
         args = (args.Count() is 0) ? new string[1] { GetCurrent() } : args;
         string submissionID = args[0].ToLower().Trim();
 

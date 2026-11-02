@@ -12,9 +12,14 @@ You can find the code for each of my submissions in their respective folder. Eac
 have also attached a date for quick lookups. I may revise this setup to a deeper tree-like setup to further keep 
 everything organized. 
 
-I have attached a README in each of the submissions folders. 
-
 The master program.cs file is only a simple selector utility, the code for each of my submissions are going to be stored
 in their own files in the assignments folder. This is to keep everything in one place. 
 
-To select, 
+This repo contains all of my submissions for the course. To choose which file you want to execute, you would need to specify
+with an input paramater. If no paramaters are provided, my most recent submission will be chosen. 
+
+
+Attached is a list for each project: 
+
+- [ dotnet run -- ltpcm ] => Leetcode Practice diffulty medium
+- [ dotnet run -- tht ]  => Tuples & Hash Tables.
