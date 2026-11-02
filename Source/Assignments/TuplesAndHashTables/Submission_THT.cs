@@ -73,7 +73,30 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         {
             string[] words = text.ToLower().Split(' ');
             // TODO: count each word with a Dictionary<string, int>, then find the biggest count
-            return ("", 0);
+
+            Dictionary<string, int> counter = new Dictionary<string, int>();
+            KeyValuePair<string, int> largest = new KeyValuePair<string, int>(string.Empty, 0);
+
+            foreach (string word in words)
+            {
+                string key = word.Trim().ToLower(); ;
+                if (counter.ContainsKey(key))
+                {
+                    counter[key]++;
+
+                    if (counter[key] > largest.Value)
+                    {
+                        largest = new KeyValuePair<string, int>(word, counter[key]);
+                    }
+                }
+
+                else
+                {
+                    counter.Add(key, 1);
+                }
+            }
+
+            return (largest.Key, largest.Value);
         }
 
         // B3: Return the names that are on BOTH lists. Use a HashSet.
