@@ -136,6 +136,24 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         // TODO: return true if the key is in the table, false if not.
         public bool ContainsKey(string key)
         {
+            int index = Hash(key);
+
+            if (dataMap[index] is null)
+            {
+                return false;
+            }
+
+            Node current = dataMap[index]!;
+            while (current is not null)
+            {
+                if (current.Key == key)
+                {
+                    return true;
+                }
+
+                current = current.Next;
+            }
+
             return false;
         }
 
@@ -144,7 +162,16 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         public bool TryGet(string key, out int value)
         {
             value = 0;
-            return false;
+            
+            if (!this.ContainsKey(key)) 
+            { 
+                return false; 
+            }
+            
+            int index = Hash(key);
+            value = this.Get(key);
+
+            return true;
         }
     }
 }
