@@ -14,29 +14,33 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
         }
 
 
-        public int[] FindNextDiscounted(int day)
-        {
-            int nextDiscountedOffering = -1;
-            int dayPrice = WeekyPrices[day];
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        //public int[] FindNextDiscounted(int[] days)
+        //{
+        //    int[] arrayOut = new int[WeekyPrices.Count()];
+        //    Stack<int> prices = new Stack<int>();
 
-            Stack<int> days = new Stack<int>();
-            int[] output = new int[WeekyPrices.Count()];
+        //    for (int i = 0; i < WeekyPrices.Count(); i++)
+        //    {
+        //        int dayPrice = days[i];
 
-            for (int i = day; i < WeekyPrices.Count() ; i++)
-            {
-                int currentDayPrice = WeekyPrices[i];
+        //        prices.TryPeek(out int previousPrice);
+                
+        //        if (dayPrice < previousPrice)
+        //        {
+        //            arrayOut[i] = prices.Pop();
+        //        }
 
-                bool peakResult = days.TryPeek(out int result);
-                if (currentDayPrice < result)
-                {
-                    output[i] = days.Pop();
-                }
+        //        prices.Push();    
 
-                days.Push(currentDayPrice);
-            }
+        //    }
 
-            return output;
-        }
+        //    return arrayOut;
+        //}
     }
 
     public static class Extentions

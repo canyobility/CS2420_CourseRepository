@@ -9,13 +9,14 @@ public class Program
     private static void InitalizeCallbacks()
     {
         callbacks["ltpcm"] = () => Submission_ITPCM.Main(new string[0]);
+        callbacks["tht"] = () => Submission_THT.Main(new string[0]);
     }
 
     /// <summary>
     /// Provided for quality of life. Will be updated to the key of the most recent submission. 
     /// </summary>
     /// <returns></returns>
-    private static string GetCurrent() => "ltpcm";
+    private static string GetCurrent() => "tht";
 
     public static void Main(string[] args)
     {
