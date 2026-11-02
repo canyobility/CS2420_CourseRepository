@@ -133,8 +133,6 @@ namespace Source.Assignments.LeetcodePracticeDifficultyMedium
 
             Console.WriteLine("Prices 1 Array: 8, 4, 6, 2, 3");
             //Console.WriteLine($"     - OUT for Day(0): {calculator1.FindNextDiscounted(0)}");
-            Console.WriteLine($"     - OUT for Day(1): {calculator1.FindNextDiscounted(prices1).PreviewArrayAsString()}");
-
 
             //Console.WriteLine("Prices 2 Array: 1, 2, 1, -1, -1");
         }
