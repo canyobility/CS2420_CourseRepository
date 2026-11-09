@@ -23,3 +23,4 @@ Attached is a list for each project:
 
 - [ dotnet run -- ltpcm ] => Leetcode Practice diffulty medium
 - [ dotnet run -- tht ]  => Tuples & Hash Tables.
+- [ dotnet run --h5t ] => Homework 5, trees.

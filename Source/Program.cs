@@ -10,17 +10,17 @@ public class Program
     {
         callbacks["ltpcm"] = () => Submission_ITPCM.Main(new string[0]);
         callbacks["tht"] = () => Submission_THT.Main(new string[0]);
+        callbacks["h5t"] = () => Submission_H5T.Main(new string[0]);
     }
 
     /// <summary>
     /// Provided for quality of life. Will be updated to the key of the most recent submission. 
     /// </summary>
     /// <returns></returns>
-    private static string GetCurrent() => "tht";
+    private static string GetCurrent() => "h5t";
 
     public static void Main(string[] args)
     {
-        Console.WriteLine(args[0]);
         args = (args.Count() is 0) ? new string[1] { GetCurrent() } : args;
         string submissionID = args[0].ToLower().Trim();
 
