@@ -113,39 +113,74 @@ public class BinarySearchTree
    assignment page.
 
    ---- Question 1 ----
-   a) root:
-   b) leaves:
-   c) internal nodes:
-   d) parent of 35:            sibling of 20:
-   e) depth of 35:             height of node 30:
-   f) height of tree:          size:
-   g) degree of 70:
-   h) valid BST? why:
+   a) root: 50
+   b) leaves: 35, 45
+   c) internal nodes: 30, 40, 70
+   d) parent of 35: 40 
+      sibling of 20: 40 
+   e) depth of 35: 3
+      height of node 30: 1
+   f) height of tree: 3          
+      size: 8
+   g) degree of 70: 1
+   h) valid BST? why: Yes, all right children nodes are greater than the left children. 
 
    ---- Question 2 ----   (Yes / No)
-                 Tree A    Tree B    Tree C
-   Full?
-   Perfect?
-   Complete?
-   Reasons for each No:
+   Tree A:                  
+       Full? Yes
+       Perfect? No
+       Complete? Yes
+       Reasons for each No:
+
+    Tree B:                  
+       Full? Yes
+       Perfect? Yes
+       Complete? Yes
+       Reasons for each No:
+
+    Tree C:                  
+       Full? Yes
+       Perfect? No
+       Complete? Yes
+       Reasons for each No:
 
    ---- Question 3 ----
-   a) tree:
+   Note: the trees for Questions three and four were generated with Visual Studio using the draw.io extention. I 
+         used Visual Studio for the remainder of this submission as my primary IDE.
 
-   b) height:                  number of leaves:
-   c) Contains(32) visits:              returns:
-      Contains(60) visits:              returns:
+   a) tree: Refer to drawmBstQ3.png for the final drawing: Source\Assignments\HomeworkFiveTrees\drawnBstQ3.png
+
+   b) height: 3                  number of leaves: 5
+   c) Contains(32) visits: 4              returns: True
+      Contains(60) visits: 3              returns: False
 
    ---- Question 4 ----
-   a) tree:
+   a) tree: Refer to drawmBstQ4.png for the final drawing: Source\Assignments\HomeworkFiveTrees\drawnBstQ4.png
 
-      height:
-   b) nodes visited by Contains(50):     Big O:     acts like:
+      height: 4
+   b) nodes visited by Contains(50): 4     
+        Big O: n       
+        acts like: Singly linked list 
 
    ---- Question 5 ----
-   a) tree:
+   a) tree: Refer to drawmBstQ5.png for the final drawing: Source\Assignments\HomeworkFiveTrees\drawnBstQ5.png
 
    b) children of 70 (show math):
+        Left: 2(1) + 1 = (i: 3, v: 40)
+        Left: 2(1) + 2 = (i: 4, v: 65)
+
    c) parent of 35 (show math):
+        Index: 8
+        Parent: (8 - 1) / 2 => 
+                (7 / 2) => 
+                Floor(3.5) 
+                = (i: 3, v: 30)
+
    d) why 65 is a leaf (show math):
+        Total Nodes: 8
+        Index: 4
+        Proof: 2(4) + 1 => 
+               8 + 1 =>
+               9 =>
+               9 < 8 = False
 */
