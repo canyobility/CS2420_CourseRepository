@@ -103,7 +103,13 @@ public class BinarySearchTree
     // TODO: return the biggest value in the tree. (You can assume the tree is not empty.)
     public int Max()
     {
-        return 0;
+        Node temp = root;
+        while (temp.Right != null)
+        {
+            temp = temp.Right;
+        }
+
+        return temp.Value;
     }
 
     // TODO: return the depth of the node that holds "value".
@@ -111,7 +117,20 @@ public class BinarySearchTree
     //       Hint: it works like Contains, but count the steps as you go down.
     public int Depth(int value)
     {
-        return 0;
+        int foundDepth = 0;
+        Node temp = root;
+        while (temp != null)
+        {
+            if (temp.Value == value) { return  foundDepth; }
+            foundDepth++;
+
+            if (value < temp.Value) temp = temp.Left;
+            else if (value > temp.Value) temp = temp.Right;
+            
+
+        }
+
+        return -1;
     }
 }
 
