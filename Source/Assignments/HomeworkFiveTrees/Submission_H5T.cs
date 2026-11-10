@@ -90,7 +90,14 @@ public class BinarySearchTree
     // TODO: return the smallest value in the tree. (You can assume the tree is not empty.)
     public int Min()
     {
-        return 0;
+        Node temp = root;
+
+        while (temp.Left != null)
+        {
+            temp = temp.Left;
+        }
+
+        return temp.Value;
     }
 
     // TODO: return the biggest value in the tree. (You can assume the tree is not empty.)
