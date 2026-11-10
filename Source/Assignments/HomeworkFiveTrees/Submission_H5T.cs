@@ -87,10 +87,20 @@ public class BinarySearchTree
         return false;
     }
 
-    // TODO: return the smallest value in the tree. (You can assume the tree is not empty.)
+
+    /// <summary>
+    /// Finds and returns the smallest value saved in the tree. 
+    /// </summary>
+    /// <returns>Int: Smallest Value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public int Min()
     {
         Node temp = root;
+
+        if (temp is null)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
 
         while (temp.Left != null)
         {
@@ -100,10 +110,21 @@ public class BinarySearchTree
         return temp.Value;
     }
 
-    // TODO: return the biggest value in the tree. (You can assume the tree is not empty.)
+
+    /// <summary>
+    /// Finds and returns the largest value saved in the tree. 
+    /// </summary>
+    /// <returns>Int: Largest value.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the root node is null.</exception>
     public int Max()
     {
         Node temp = root;
+
+        if (temp is null)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
         while (temp.Right != null)
         {
             temp = temp.Right;
@@ -112,9 +133,13 @@ public class BinarySearchTree
         return temp.Value;
     }
 
-    // TODO: return the depth of the node that holds "value".
-    //       The root has depth 0. If the value is not in the tree, return -1.
-    //       Hint: it works like Contains, but count the steps as you go down.
+
+    /// <summary>
+    /// Computes the depth of a specified node. If that node is not present in the
+    /// tree, -1 will be returned. 
+    /// </summary>
+    /// <param name="value">Node to search for.</param>
+    /// <returns>Found depth.</returns>
     public int Depth(int value)
     {
         int foundDepth = 0;
