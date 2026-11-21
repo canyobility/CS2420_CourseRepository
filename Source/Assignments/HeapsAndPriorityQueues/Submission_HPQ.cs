@@ -46,16 +46,37 @@ A7. Give two real-life examples where a priority queue is a good fit. For each o
  */
 
 
-public class MinPriorityQueue
+using System.Collections;
+
+public class MinPriorityQueue : IEnumerable<int>
 {
 	private List<int> queue;
     public int Count { get; set; }
     public bool IsEmpty { get; set; }
-	public void Insert(int priority) => throw new NotImplementedException();
+
+	/// <summary>
+	/// method of insertion to the priority queue. 
+	/// </summary>
+	/// <param name="priority"></param>
+	public void Insert(int priority) 
+	{
+		queue.Add(priority);
+	}
+
 	public int Peek() => throw new NotImplementedException();
 	public int RemoveMin() => throw new NotImplementedException();
 
-	public MinPriorityQueue()
+    public IEnumerator<int> GetEnumerator()
+    {
+        foreach (var item in queue) yield return item;
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public MinPriorityQueue()
 	{
 		queue = new List<int>();
 	}
@@ -68,7 +89,7 @@ public class Submission_HPQ
 	{
 		foreach (int priority in numbers)
 		{
-			//queue.Insert(priority);
+			queue.Insert(priority);
 		}
 
 		return;
@@ -77,10 +98,20 @@ public class Submission_HPQ
 	public static void Main(string[] args)
 	{
 		MinPriorityQueue queue = new MinPriorityQueue();
+		string displaySpacer = new string('=', Console.WindowWidth);
 		int[] numbers = [10, 15, 25, 40, 45, 50];
         FillHeap(queue, numbers);
 
 		Console.WriteLine($"Built min heap in order [{string.Join(", ", numbers)}]");
+		Console.WriteLine("Queue Contents: ");
+		foreach (int priority in queue)
+		{
+			Console.WriteLine($"	- {priority}");
+		}
+
+		Console.WriteLine(displaySpacer);
+
+		Console.WriteLine("RemoveMin");
 		while (!queue.IsEmpty)
 		{
 			int removedRoot = queue.RemoveMin();
