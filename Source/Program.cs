@@ -11,13 +11,14 @@ public class Program
         callbacks["ltpcm"] = () => Submission_ITPCM.Main(new string[0]);
         callbacks["tht"] = () => Submission_THT.Main(new string[0]);
         callbacks["h5t"] = () => Submission_H5T.Main(new string[0]);
+        callbacks["hpq"] = () => Submission_HPQ.Main(new string[0]);
     }
 
     /// <summary>
     /// Provided for quality of life. Will be updated to the key of the most recent submission. 
     /// </summary>
     /// <returns></returns>
-    private static string GetCurrent() => "h5t";
+    private static string GetCurrent() => "hpq";
 
     public static void Main(string[] args)
     {
