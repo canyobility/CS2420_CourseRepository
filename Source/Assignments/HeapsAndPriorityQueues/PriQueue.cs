@@ -13,7 +13,7 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
         public PriQueue(IHeap<T> heap)
         {
-            if (_heap is not IHeap<T>)
+            if (heap is not IHeap<T>)
             {
                 throw new ArgumentException($"Heap must impliment the IHeap interface.");
             }
@@ -53,8 +53,8 @@ namespace Source.Assignments.HeapsAndPriorityQueues
     /// queue.Enqueue(55);
     /// </code>
     /// 
-    /// These are marked as extention methods instead of being stored in the base class due to the
-    /// generic type.
+    /// These are marked as extention methods as so the numeric constraint can be applied without 
+    /// restricting the generic type in the PriQueue&lt;T&gt; class. 
     /// </remarks>
     public static class NumericPriQueueExtentionShorthands
     {

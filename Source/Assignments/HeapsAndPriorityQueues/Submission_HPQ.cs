@@ -53,7 +53,7 @@ using System.Runtime.InteropServices.Marshalling;
 
 public class Submission_HPQ
 {
-	public static void FillHeap(PriQueue<int> queue, int[] numbers)
+	public static void FillQueue(PriQueue<int> queue, int[] numbers)
 	{
 		foreach (int priority in numbers)
 		{
@@ -68,7 +68,7 @@ public class Submission_HPQ
         PriQueue<int> queue = new PriQueue<int>(new MinHeap<int>());
 		
 		int[] numbers = [10, 40, 25, 50, 10, 45];
-        FillHeap(queue, numbers);
+        FillQueue(queue, numbers);
 
 		
     }
