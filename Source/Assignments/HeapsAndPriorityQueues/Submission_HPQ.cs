@@ -47,11 +47,12 @@ A7. Give two real-life examples where a priority queue is a good fit. For each o
 
 
 using System.Collections;
+using System.Runtime.InteropServices.Marshalling;
 
 public class MinPriorityQueue : IEnumerable<int>
 {
 	private List<int> queue;
-    public int Count { get; set; }
+    public int Count => queue.Count;
     public bool IsEmpty { get; set; }
 
 	/// <summary>
@@ -61,11 +62,22 @@ public class MinPriorityQueue : IEnumerable<int>
 	public void Insert(int priority) 
 	{
 		queue.Add(priority);
-	}
 
-	public int Peek() => throw new NotImplementedException();
+		int current = this.Count - 1;
+		int parent(int i) => (i - 1) / 2;
+
+        while (current > 0 && queue[current] > queue[parent(this.Count)])
+		{
+			current = (this.Count - 1) / 2;
+			(queue[current], queue[parent(this.Count)]) = (queue[parent(this.Count)], queue[current]);
+		}
+	
+    }
+
+    public int? Peek() => (IsEmpty) ? null : queue[0];
 	public int RemoveMin() => throw new NotImplementedException();
 
+	// Note: This method exists for internal display purposes. 
     public IEnumerator<int> GetEnumerator()
     {
         foreach (var item in queue) yield return item;
@@ -99,7 +111,7 @@ public class Submission_HPQ
 	{
 		MinPriorityQueue queue = new MinPriorityQueue();
 		string displaySpacer = new string('=', Console.WindowWidth);
-		int[] numbers = [10, 15, 25, 40, 45, 50];
+		int[] numbers = [10, 40, 25, 50, 10, 45];
         FillHeap(queue, numbers);
 
 		Console.WriteLine($"Built min heap in order [{string.Join(", ", numbers)}]");
