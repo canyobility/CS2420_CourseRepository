@@ -46,62 +46,18 @@ A7. Give two real-life examples where a priority queue is a good fit. For each o
  */
 
 
+using Source.Assignments.HeapsAndPriorityQueues;
 using System.Collections;
 using System.Runtime.InteropServices.Marshalling;
-
-public class MinPriorityQueue : IEnumerable<int>
-{
-	private List<int> queue;
-    public int Count => queue.Count;
-    public bool IsEmpty { get; set; }
-
-	/// <summary>
-	/// method of insertion to the priority queue. 
-	/// </summary>
-	/// <param name="priority"></param>
-	public void Insert(int priority) 
-	{
-		queue.Add(priority);
-
-		int current = this.Count - 1;
-		int parent(int i) => (i - 1) / 2;
-
-        while (current > 0 && queue[current] > queue[parent(this.Count)])
-		{
-			current = (this.Count - 1) / 2;
-			(queue[current], queue[parent(this.Count)]) = (queue[parent(this.Count)], queue[current]);
-		}
-	
-    }
-
-    public int? Peek() => (IsEmpty) ? null : queue[0];
-	public int RemoveMin() => throw new NotImplementedException();
-
-	// Note: This method exists for internal display purposes. 
-    public IEnumerator<int> GetEnumerator()
-    {
-        foreach (var item in queue) yield return item;
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public MinPriorityQueue()
-	{
-		queue = new List<int>();
-	}
-}
 
 
 public class Submission_HPQ
 {
-	public static void FillHeap(MinPriorityQueue queue, int[] numbers)
+	public static void FillHeap(PriQueue<int> queue, int[] numbers)
 	{
 		foreach (int priority in numbers)
 		{
-			queue.Insert(priority);
+			queue.Enqueue(priority);
 		}
 
 		return;
@@ -109,25 +65,11 @@ public class Submission_HPQ
 
 	public static void Main(string[] args)
 	{
-		MinPriorityQueue queue = new MinPriorityQueue();
-		string displaySpacer = new string('=', Console.WindowWidth);
+        PriQueue<int> queue = new PriQueue<int>(new MinHeap<int>());
+		
 		int[] numbers = [10, 40, 25, 50, 10, 45];
         FillHeap(queue, numbers);
 
-		Console.WriteLine($"Built min heap in order [{string.Join(", ", numbers)}]");
-		Console.WriteLine("Queue Contents: ");
-		foreach (int priority in queue)
-		{
-			Console.WriteLine($"	- {priority}");
-		}
-
-		Console.WriteLine(displaySpacer);
-
-		Console.WriteLine("RemoveMin");
-		while (!queue.IsEmpty)
-		{
-			int removedRoot = queue.RemoveMin();
-			Console.WriteLine($"Removed root node of value: {removedRoot}");
-		}
+		
     }
 }
