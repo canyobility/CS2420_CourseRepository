@@ -70,6 +70,7 @@ public class Submission_HPQ
 		}
 
 		Console.WriteLine(horizontalBand);
-		Console.WriteLine(queue._heap.ToString());
+        Console.WriteLine("Resulting Min-Heap: ");
+        Console.WriteLine(queue._heap.ToString());
 	}
 }
