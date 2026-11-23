@@ -53,23 +53,23 @@ using System.Runtime.InteropServices.Marshalling;
 
 public class Submission_HPQ
 {
-	public static void FillQueue(PriQueue<int> queue, int[] numbers)
-	{
-		foreach (int priority in numbers)
-		{
-			queue.Enqueue(priority);
-		}
 
-		return;
-	}
 
 	public static void Main(string[] args)
 	{
-        PriQueue<int> queue = new PriQueue<int>(new MinHeap<int>());
+		MinHeap<int> heap = new MinHeap<int>();
+        PriQueue<int> queue = new PriQueue<int>(heap);
 		
 		int[] numbers = [10, 40, 25, 50, 10, 45];
-        FillQueue(queue, numbers);
+		string horizontalBand = new string('=', Console.WindowWidth);
 
-		
-    }
+		foreach (int priority in numbers)
+		{
+			Console.WriteLine($"Inserting value: {priority}");
+			queue.Enqueue(priority);
+		}
+
+		Console.WriteLine(horizontalBand);
+		Console.WriteLine(queue._heap.ToString());
+	}
 }

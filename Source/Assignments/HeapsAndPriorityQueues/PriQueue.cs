@@ -10,7 +10,6 @@ namespace Source.Assignments.HeapsAndPriorityQueues
     {
         public readonly IHeap<T> _heap;
 
-
         public PriQueue(IHeap<T> heap)
         {
             if (heap is not IHeap<T>)
@@ -20,12 +19,19 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
             this._heap = heap;
         }
-        public T? Peek() => _heap.Peek(); 
+        public HeapBucket<T>? Peek() => _heap.Peek(); 
         public int Count => _heap.Count;
         public bool IsEmpty => _heap.IsEmpty;
 
 
-        public T Enqueue(T value, int priority) => throw new NotImplementedException();
+        public T Enqueue(T value, int priority)
+        {
+            if (_heap == null)
+                throw new InvalidOperationException("Queue missing heap base.");
+
+            _heap.Push(value, priority);
+            return value;
+        }
 
         public T Dequeue(int priority) => throw new NotImplementedException();
     }
