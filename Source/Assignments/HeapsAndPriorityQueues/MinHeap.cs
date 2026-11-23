@@ -78,14 +78,11 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
         public HeapBucket<T>? Peek()
         {
-            throw new NotImplementedException();
+            return Root;
         }
 
-        public HeapBucket<T> Pop()
-        {
-            throw new NotImplementedException();
-        }
 
+        #region Insertion
         public HeapBucket<T> Push(T Value, int Priority)
         {
             if (Count + 1 > _array.Length) ResizeArray();
@@ -118,7 +115,9 @@ namespace Source.Assignments.HeapsAndPriorityQueues
             }
         }
 
+        #endregion
 
+        #region Utilities
         // Copied directly from assignment rubric.
         private int GetLeftChildIndex(int i) => (2 * i) + 1;
         private int GetRightChildIndex(int i) => (2 * i) + 2;
@@ -166,6 +165,14 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
             return $"{outp}";
         }
+        #endregion
+
+        #region Deletion
+        public HeapBucket<T> Pop()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
     #endregion
 }
