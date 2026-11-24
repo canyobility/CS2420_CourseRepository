@@ -58,6 +58,11 @@ public class Submission_HPQ
 {
 	// Note: I am not using the implimented IHeap interface to keep this portion of the assignment 
 	//		 identical to the rubric. 
+	/// <summary>
+	/// Checks if an array of passed intagers follow the max-heap condition.
+	/// </summary>
+	/// <param name="arr">Array to check.</param>
+	/// <returns></returns>
 	public static bool IsMaxHeap(int[] arr)
 	{
 		// Copied directly from Minheap.cs, & Assignment Rubric.
