@@ -57,14 +57,15 @@ using System.Runtime.InteropServices.Marshalling;
 
 public class Submission_HPQ
 {
-	// Note: I am not using the implimented IHeap interface to keep this portion of the assignment 
-	//		 identical to the rubric. 
-	/// <summary>
-	/// Checks if an array of passed intagers follow the max-heap condition.
-	/// </summary>
-	/// <param name="arr">Array to check.</param>
-	/// <returns></returns>
-	public static bool IsMaxHeap(int[] arr)
+    #region Logic
+    // Note: I am not using the implimented IHeap interface to keep this portion of the assignment 
+    //		 identical to the rubric. 
+    /// <summary>
+    /// Checks if an array of passed intagers follow the max-heap condition.
+    /// </summary>
+    /// <param name="arr">Array to check.</param>
+    /// <returns></returns>
+    public static bool IsMaxHeap(int[] arr)
 	{
 		// Copied directly from Minheap.cs, & Assignment Rubric.
 		int GetLeftChildIndex(int i) => (2 * i) + 1;
@@ -181,8 +182,45 @@ public class Submission_HPQ
         }
     }
 
+	
+	/// <summary>
+	/// Returns an int array of the top K scores given an int array in format of an array of 
+	/// numbers.
+	/// 
+	/// Note: While this solution can technically produce the expected output, I am not conifdent
+	///		  this implimentation is the "correct" and or expected way to solve this problem. 
+	/// </summary>
+	/// <param name="array">Array to trim the top-k results.</param>
+	/// <param name="amountToSave">Length of the output array. Higher = more scores.</param>
+	/// <returns></returns>
+	public static int[] GetTopKScores(int[] array, int amountToSave = 3)
+	{
+		PriorityQueue<int, int> scoreQueue = new PriorityQueue<int, int>();
+		foreach (int i in array)
+		{
+			scoreQueue.Enqueue(i, i);
+		}
 
-	public static void Main(string[] args)
+		int scoresToFilter = Math.Clamp((scoreQueue.Count - amountToSave), 0, scoreQueue.Count);
+
+		for (int e = scoresToFilter; e > 0; e--)
+			scoreQueue.Dequeue();
+
+		int[] outputArray = new int[amountToSave];
+		int indexer = amountToSave - 1;
+		while (scoreQueue.Count > 0)
+		{
+			outputArray[indexer] = scoreQueue.Dequeue();
+			indexer--;
+		}
+
+		return outputArray;
+	}
+
+
+    #endregion
+    #region Runtime
+    public static void Main(string[] args)
 	{
 		MinHeap<int> heap1 = new MinHeap<int>();
 		MinHeap<int> heap2 = new MinHeap<int>();
@@ -192,6 +230,7 @@ public class Submission_HPQ
 		int[] numbers = [10, 40, 25, 50, 10, 45];
 		string horizontalBand = new string('=', Console.WindowWidth);
 
+		Console.WriteLine("B1: Program a min-heap Qriority Queue. ");
 		Console.WriteLine("Instanciated Priority Queue 1");
 		Console.WriteLine("Instanciated Priority Queue 2");
 
@@ -234,7 +273,7 @@ public class Submission_HPQ
 		}
 
 		Console.WriteLine(horizontalBand);
-		Console.WriteLine("Part B: IsMaxHeap()");
+		Console.WriteLine("B1: IsMaxHeap()");
 
 		testCase[] Cases = new testCase[5];
 		Cases[0] = new testCase(input: new int[] { 90, 70, 80, 30, 60, 50 },
@@ -268,7 +307,16 @@ public class Submission_HPQ
 		HeapSort(arrayToSort);
 		Console.WriteLine($"Array Sorted:               [ {string.Join(", ", arrayToSort)} ]");
 
-	}
+		Console.WriteLine(horizontalBand);
+		Console.WriteLine("B4: TopK.");
+
+		int[] totalScores = new int[] { 42, 17, 99, 63, 8, 75, 31 };
+		int[] topScores = GetTopKScores(totalScores);
+		Console.WriteLine($"Current Total Scores: { string.Join(", ", totalScores)}");
+		Console.WriteLine($"Current Top Scores: { string.Join(", ", topScores)}");
+    }
 
 	record testCase(int[] input, bool shouldSucceed);
+
+    #endregion
 }
