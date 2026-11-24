@@ -119,6 +119,11 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
 
         #region Deletion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public HeapBucket<T> Pop()
         {
             if (IsEmpty || _array is null)
