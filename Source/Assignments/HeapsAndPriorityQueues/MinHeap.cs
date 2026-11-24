@@ -117,6 +117,67 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
         #endregion
 
+
+        #region Deletion
+        public HeapBucket<T> Pop()
+        {
+            if (IsEmpty || _array is null)
+                throw new InvalidOperationException("Attempt to dequeue empty heap.");
+
+            HeapBucket<T> target = this.Root;
+            T capturedVal = target.Value;
+
+            if (Count == 1)
+            {
+                _array[0] = null;
+                _index--;
+                return target;
+            }
+
+            _index--;
+            SwapIndexes(0, _index);
+            this._array[_index] = null;
+
+            SiftDown(0);
+
+            return target;
+        }
+
+
+        private void SiftDown(int index)
+        {
+            bool leftChildExists() => GetLeftChildIndex(index) < _index;
+            bool rightChildExists() => GetRightChildIndex(index) < _index;
+
+            while (leftChildExists() || rightChildExists())
+            {
+                int lowestIndex = index;
+                HeapBucket<T> current = _array[index];
+
+                if (leftChildExists() && 
+                    _array[GetLeftChildIndex(index)].Priority < current.Priority )
+                {
+                    lowestIndex = GetLeftChildIndex(index);
+                    current = _array[lowestIndex];
+                }
+                if (rightChildExists() &&
+                     _array[GetRightChildIndex(index)].Priority < _array[lowestIndex].Priority)
+                {
+                    lowestIndex = GetRightChildIndex(index);
+                }
+                if (lowestIndex == index)
+                {
+                    break;
+                }
+
+                SwapIndexes(index, lowestIndex);
+                index = lowestIndex;
+            }
+        }
+
+        #endregion
+
+
         #region Utilities
         // Copied directly from assignment rubric.
         private int GetLeftChildIndex(int i) => (2 * i) + 1;
@@ -167,12 +228,6 @@ namespace Source.Assignments.HeapsAndPriorityQueues
         }
         #endregion
 
-        #region Deletion
-        public HeapBucket<T> Pop()
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
     #endregion
 }

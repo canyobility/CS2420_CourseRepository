@@ -33,7 +33,18 @@ namespace Source.Assignments.HeapsAndPriorityQueues
             return value;
         }
 
-        public T Dequeue(int priority) => throw new NotImplementedException();
+        public T Dequeue()
+        {
+            T capturedValue = _heap.Peek().Value;
+            
+            if (capturedValue is null)
+                throw new InvalidOperationException("Queue missing heap base.");
+
+
+            _heap.Pop();
+
+            return capturedValue;
+        }
     }
 
 

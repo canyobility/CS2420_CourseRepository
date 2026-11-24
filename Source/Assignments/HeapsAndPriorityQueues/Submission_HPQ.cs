@@ -69,8 +69,18 @@ public class Submission_HPQ
 			queue.Enqueue(priority);
 		}
 
-		Console.WriteLine(horizontalBand);
+		Console.WriteLine();
         Console.WriteLine("Resulting Min-Heap: ");
         Console.WriteLine(queue._heap.ToString());
-	}
+		Console.WriteLine(horizontalBand);
+	
+		foreach (int priority in numbers)
+		{
+			int capturedPri = queue.Dequeue();
+            Console.WriteLine($"Dequeue head from min-heap: {capturedPri}");
+
+			Console.WriteLine("Result: ");
+            Console.WriteLine(queue._heap.ToString());
+        }
+    }
 }
