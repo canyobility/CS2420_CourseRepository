@@ -43,6 +43,9 @@ Sorted list
 Binary heap 			
 
 A7. Give two real-life examples where a priority queue is a good fit. For each one, say what the items are and what the priority is.
+ - Doctors office managing patients, especally in the emergency room. 
+ - Render farms, where some animated sequences have a higher immediate priority than others. 
+ - 
  */
 
 
@@ -57,7 +60,25 @@ public class Submission_HPQ
 	//		 identical to the rubric. 
 	public static bool IsMaxHeap(int[] arr)
 	{
-		return false;
+		// Copied directly from Minheap.cs, & Assignment Rubric.
+		int GetLeftChildIndex(int i) => (2 * i) + 1;
+		int GetRightChildIndex(int i) => (2 * i) + 2;
+		int GetParentIndex(int i) => ((i - 1) / 2);
+
+		bool LeftChildExists(int index) => GetLeftChildIndex(index) < arr.Length;
+		bool RightChildExists(int index) => GetRightChildIndex(index) < arr.Length;
+
+        for (int i = 0; i < arr.Length; i++)
+		{
+			if (LeftChildExists(i) && arr[i] < arr[GetLeftChildIndex(i)])
+				return false;
+
+            if (RightChildExists(i) && arr[i] < arr[GetRightChildIndex(i)])
+                return false;
+
+        }
+
+        return true;
 	}
 
 	public static void Main(string[] args)
