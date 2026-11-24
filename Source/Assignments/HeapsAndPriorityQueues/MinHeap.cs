@@ -76,13 +76,25 @@ namespace Source.Assignments.HeapsAndPriorityQueues
         }
 
 
+        /// <summary>
+        /// Returns the current root bucket. Implimented to satisfy the B1 Rubric. 
+        /// </summary>
+        /// <returns></returns>
         public HeapBucket<T>? Peek()
         {
+            if (IsEmpty) throw new InvalidOperationException();
             return Root;
         }
 
 
         #region Insertion
+        /// <summary>
+        /// Inserts a new value to the end of the queue, then shifts it up until the min-heap 
+        /// condition is satisfied. Will resize the array if an insertion out of bounds is reached. 
+        /// </summary>
+        /// <param name="Value">Value to insert. </param>
+        /// <param name="Priority">Attached Priority. </param>
+        /// <returns></returns>
         public HeapBucket<T> Push(T Value, int Priority)
         {
             if (Count + 1 > _array.Length) ResizeArray();
@@ -120,10 +132,13 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
         #region Deletion
         /// <summary>
+        /// Acts as the RemoveMin() method in a standard Min-Heap implimentation.
         /// 
+        /// Removes the current root item, and propigates the futhermost left element until the 
+        /// min-heap condition is satisfied, then returns the popped value. 
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns>HeapBucket<T>: The value currently stored to the queue root.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the queue is empty.</exception>
         public HeapBucket<T> Pop()
         {
             if (IsEmpty || _array is null)
@@ -149,6 +164,10 @@ namespace Source.Assignments.HeapsAndPriorityQueues
         }
 
 
+        /// <summary>
+        /// Method to correct the min-heap condition from the removal operation.
+        /// </summary>
+        /// <param name="index">The root index which the operation should start. </param>
         private void SiftDown(int index)
         {
             bool leftChildExists() => GetLeftChildIndex(index) < _index;
@@ -189,6 +208,13 @@ namespace Source.Assignments.HeapsAndPriorityQueues
         private int GetRightChildIndex(int i) => (2 * i) + 2;
         private int GetParentIndex(int i) => ((i - 1) / 2);
         
+
+        /// <summary>
+        /// Takes the position of two indexes on self._array, and swaps them using tuple 
+        /// deconstruction.
+        /// </summary>
+        /// <param name="IndexA">Index A. </param>
+        /// <param name="IndexB">Index B. </param>
         private void SwapIndexes(int IndexA, int IndexB)
         {
             ref HeapBucket<T> indexA =  ref _array[IndexA];
@@ -196,6 +222,7 @@ namespace Source.Assignments.HeapsAndPriorityQueues
 
             (indexB, indexA) = (indexA, indexB);
         }
+
 
         /// <summary>
         /// Doubles the length of the current heap array.
@@ -232,7 +259,6 @@ namespace Source.Assignments.HeapsAndPriorityQueues
             return $"{outp}";
         }
         #endregion
-
     }
     #endregion
 }

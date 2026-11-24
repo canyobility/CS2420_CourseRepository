@@ -53,34 +53,87 @@ using System.Runtime.InteropServices.Marshalling;
 
 public class Submission_HPQ
 {
-
+	// Note: I am not using the implimented IHeap interface to keep this portion of the assignment 
+	//		 identical to the rubric. 
+	public static bool IsMaxHeap(int[] arr)
+	{
+		return false;
+	}
 
 	public static void Main(string[] args)
 	{
-		MinHeap<int> heap = new MinHeap<int>();
-        PriQueue<int> queue = new PriQueue<int>(heap);
+		MinHeap<int> heap1 = new MinHeap<int>();
+		MinHeap<int> heap2 = new MinHeap<int>();
+        PriQueue<int> queue1 = new PriQueue<int>(heap1);
+        PriQueue<int> queue2 = new PriQueue<int>(heap2);
 		
 		int[] numbers = [10, 40, 25, 50, 10, 45];
 		string horizontalBand = new string('=', Console.WindowWidth);
 
-		foreach (int priority in numbers)
+		Console.WriteLine("Instanciated Priority Queue 1");
+		Console.WriteLine("Instanciated Priority Queue 2");
+
+        Console.WriteLine(horizontalBand);
+
+        Console.WriteLine("Empty Priority Queue:");
+		Console.WriteLine("Root for Queue 2 (null expected): " + ((queue2._heap.Root is null) ? "null" : queue2._heap.Root.ToString()));
+		Console.WriteLine("Calling Dequeue() on Queue 2 [RemoveMin()]. Fail expected. ");
+
+		try
 		{
-			Console.WriteLine($"Inserting value: {priority}");
-			queue.Enqueue(priority);
+			queue2.Dequeue();
+		}
+		catch (Exception e)
+		{
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Insertion Failed: " + e.Message);
+			Console.ResetColor();
+		}
+
+        Console.WriteLine(horizontalBand);
+		
+        foreach (int priority in numbers)
+		{
+			Console.WriteLine($"Inserting value to Queue1: {priority}");
+			queue1.Enqueue(priority);
 		}
 
 		Console.WriteLine();
-        Console.WriteLine("Resulting Min-Heap: ");
-        Console.WriteLine(queue._heap.ToString());
+        Console.WriteLine("Resulting Min-Heap (priority Queue 1): ");
+        Console.WriteLine(queue1._heap.ToString());
 		Console.WriteLine(horizontalBand);
 	
 		foreach (int priority in numbers)
 		{
-			int capturedPri = queue.Dequeue();
-            Console.WriteLine($"Dequeue head from min-heap: {capturedPri}");
-
+			int capturedPri = queue1.Dequeue();
+            Console.WriteLine($"Dequeue head from Priority Queue 1: {capturedPri}");
 			Console.WriteLine("Result: ");
-            Console.WriteLine(queue._heap.ToString());
+            Console.WriteLine(queue1._heap.ToString());
         }
+
+        Console.WriteLine(horizontalBand);
+		Console.WriteLine("Part B:");
+
+		testCase[] Cases = new testCase[5];
+		Cases[0] = new testCase(input: new int[] { 90, 70, 80, 30, 60, 50}, 
+									  shouldSucceed: true);
+        Cases[1] = new testCase(input: new int[] { 50, 40, 30, 45, 10},
+                                  shouldSucceed: true);
+        Cases[2] = new testCase(input: new int[] { 10, 20, 30},
+                              shouldSucceed: false);
+        Cases[3] = new testCase(input: new int[] { 7},
+                              shouldSucceed: true);
+        Cases[4] = new testCase(input: new int[] { },
+                              shouldSucceed: true);
+
+		for (int i = 0; i < Cases.Length; i++)
+		{
+			testCase testCase = Cases[i];
+			Console.WriteLine($"Case {i + 1}");
+			Console.WriteLine($"Array: [ {string.Join(", ", testCase.input)} ]");
+			Console.WriteLine($"         Is Max-Heap: {((IsMaxHeap(testCase.input)) ? "Yes" : "No" )}");
+		}
     }
+
+	record testCase(int[] input, bool shouldSucceed);
 }
