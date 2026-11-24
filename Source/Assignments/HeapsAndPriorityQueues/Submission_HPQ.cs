@@ -51,6 +51,7 @@ A7. Give two real-life examples where a priority queue is a good fit. For each o
 
 using Source.Assignments.HeapsAndPriorityQueues;
 using System.Collections;
+using System.Reflection;
 using System.Runtime.InteropServices.Marshalling;
 
 
@@ -86,22 +87,117 @@ public class Submission_HPQ
         return true;
 	}
 
+    /*
+      I have Copied high-level psudocode from a google search to work with C#. 
+      The inital Psudocode is attached below.  
+	
+	  function heapSort(array):
+			n = length(array)
+
+			// 1. Build a max-heap from the unsorted array
+			for i from floor(n / 2) - 1 down to 0:
+				heapify(array, n, i)
+
+			// 2. Repeatedly extract the maximum element and rebuild the heap
+			for end from n - 1 down to 1:
+				swap array[0] and array[end]
+				heapify(array, end, 0)
+
+	   function heapify(array, heapSize, rootIndex):
+			largest = rootIndex
+			left = 2 * rootIndex + 1
+			right = 2 * rootIndex + 2
+
+			// Check if left child exists and is greater than current largest
+			if left < heapSize and array[left] > array[largest]:
+				largest = left
+
+			// Check if right child exists and is greater than current largest
+			if right < heapSize and array[right] > array[largest]:
+				largest = right
+
+			// If the largest element is not the root, swap and continue sifting down
+			if largest != rootIndex:
+				swap array[rootIndex] and array[largest]
+				heapify(array, heapSize, largest)
+	 */
+
+
+	/// <summary>
+	/// Implimentation of HeapSort. 
+	/// </summary>
+	/// <param name="arr">Array to sort. </param>
+    public static void HeapSort(int[] arr)
+	{
+		int length = arr.Length;
+
+		Heapify(arr);
+
+		for (int i = length - 1; i > 0; i--)
+		{
+			(arr[0], arr[i]) = (arr[i], arr[0]);
+			Heapify(arr, i, 0);
+		}
+	}
+
+
+	/// <summary>
+	/// Helper method to convert an unsorted array into a heap. 
+	/// </summary>
+	/// <param name="arr"></param>
+	/// <param name="n"></param>
+	/// <param name="i"></param>
+    private static void Heapify(int[] arr, int n, int i)
+    {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && arr[left] > arr[largest])
+            largest = left;
+
+        if (right < n && arr[right] > arr[largest])
+            largest = right;
+
+        if (largest != i)
+        {
+            (arr[largest], arr[i]) = (arr[i], arr[largest]);
+            Heapify(arr, n, largest);
+        }
+    }
+
+
+	/// <summary>
+	/// "Heapifies" an array, by converting the unsorted array to a max-heap. 
+	/// </summary>
+	/// <param name="arr">Intager array to transorm into a max-heap</param>
+    public static void Heapify(int[] arr)
+    {
+        int n = arr.Length;
+
+        for (int i = (n / 2) - 1; i >= 0; i--)
+        {
+            Heapify(arr, n, i);
+        }
+    }
+
+
 	public static void Main(string[] args)
 	{
 		MinHeap<int> heap1 = new MinHeap<int>();
 		MinHeap<int> heap2 = new MinHeap<int>();
-        PriQueue<int> queue1 = new PriQueue<int>(heap1);
-        PriQueue<int> queue2 = new PriQueue<int>(heap2);
-		
+		PriQueue<int> queue1 = new PriQueue<int>(heap1);
+		PriQueue<int> queue2 = new PriQueue<int>(heap2);
+
 		int[] numbers = [10, 40, 25, 50, 10, 45];
 		string horizontalBand = new string('=', Console.WindowWidth);
 
 		Console.WriteLine("Instanciated Priority Queue 1");
 		Console.WriteLine("Instanciated Priority Queue 2");
 
-        Console.WriteLine(horizontalBand);
+		Console.WriteLine(horizontalBand);
 
-        Console.WriteLine("Empty Priority Queue:");
+		Console.WriteLine("Empty Priority Queue:");
 		Console.WriteLine("Root for Queue 2 (null expected): " + ((queue2._heap.Root is null) ? "null" : queue2._heap.Root.ToString()));
 		Console.WriteLine("Calling Dequeue() on Queue 2 [RemoveMin()]. Fail expected. ");
 
@@ -111,55 +207,68 @@ public class Submission_HPQ
 		}
 		catch (Exception e)
 		{
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Insertion Failed: " + e.Message);
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("Insertion Failed: " + e.Message);
 			Console.ResetColor();
 		}
 
-        Console.WriteLine(horizontalBand);
-		
-        foreach (int priority in numbers)
+		Console.WriteLine(horizontalBand);
+
+		foreach (int priority in numbers)
 		{
 			Console.WriteLine($"Inserting value to Queue1: {priority}");
 			queue1.Enqueue(priority);
 		}
 
 		Console.WriteLine();
-        Console.WriteLine("Resulting Min-Heap (priority Queue 1): ");
-        Console.WriteLine(queue1._heap.ToString());
+		Console.WriteLine("Resulting Min-Heap (priority Queue 1): ");
+		Console.WriteLine(queue1._heap.ToString());
 		Console.WriteLine(horizontalBand);
-	
+
 		foreach (int priority in numbers)
 		{
 			int capturedPri = queue1.Dequeue();
-            Console.WriteLine($"Dequeue head from Priority Queue 1: {capturedPri}");
+			Console.WriteLine($"Dequeue head from Priority Queue 1: {capturedPri}");
 			Console.WriteLine("Result: ");
-            Console.WriteLine(queue1._heap.ToString());
-        }
+			Console.WriteLine(queue1._heap.ToString());
+		}
 
-        Console.WriteLine(horizontalBand);
-		Console.WriteLine("Part B:");
+		Console.WriteLine(horizontalBand);
+		Console.WriteLine("Part B: IsMaxHeap()");
 
 		testCase[] Cases = new testCase[5];
-		Cases[0] = new testCase(input: new int[] { 90, 70, 80, 30, 60, 50}, 
+		Cases[0] = new testCase(input: new int[] { 90, 70, 80, 30, 60, 50 },
 									  shouldSucceed: true);
-        Cases[1] = new testCase(input: new int[] { 50, 40, 30, 45, 10},
-                                  shouldSucceed: true);
-        Cases[2] = new testCase(input: new int[] { 10, 20, 30},
-                              shouldSucceed: false);
-        Cases[3] = new testCase(input: new int[] { 7},
-                              shouldSucceed: true);
-        Cases[4] = new testCase(input: new int[] { },
-                              shouldSucceed: true);
+		Cases[1] = new testCase(input: new int[] { 50, 40, 30, 45, 10 },
+								  shouldSucceed: true);
+		Cases[2] = new testCase(input: new int[] { 10, 20, 30 },
+							  shouldSucceed: false);
+		Cases[3] = new testCase(input: new int[] { 7 },
+							  shouldSucceed: true);
+		Cases[4] = new testCase(input: new int[] { },
+							  shouldSucceed: true);
 
 		for (int i = 0; i < Cases.Length; i++)
 		{
 			testCase testCase = Cases[i];
 			Console.WriteLine($"Case {i + 1}");
 			Console.WriteLine($"Array: [ {string.Join(", ", testCase.input)} ]");
-			Console.WriteLine($"         Is Max-Heap: {((IsMaxHeap(testCase.input)) ? "Yes" : "No" )}");
+			Console.WriteLine($"         Is Max-Heap: {((IsMaxHeap(testCase.input)) ? "Yes" : "No")}");
 		}
-    }
+
+		Console.WriteLine(horizontalBand);
+		Console.WriteLine("Part 3: Heapsort. ");
+		int[] arrayToSort = new int[] { 5, 12, 3, 20, 8, 15, 1 };
+		Console.WriteLine($"Array Unsorted:             [ {string.Join(", ", arrayToSort)} ]");
+
+		Heapify(arrayToSort);
+		Console.WriteLine($"Array Heapified (Max-Heap): [ {string.Join(", ", arrayToSort)} ]");
+		Console.WriteLine($"Array is Max-Heap:	    {((IsMaxHeap(arrayToSort)) ? "Yes" : "No") }");
+
+		HeapSort(arrayToSort);
+		Console.WriteLine($"Array Sorted:               [ {string.Join(", ", arrayToSort)} ]");
+
+	}
 
 	record testCase(int[] input, bool shouldSucceed);
 }
