@@ -273,7 +273,7 @@ public class Submission_HPQ
 		}
 
 		Console.WriteLine(horizontalBand);
-		Console.WriteLine("B1: IsMaxHeap()");
+		Console.WriteLine("B2: IsMaxHeap()");
 
 		testCase[] Cases = new testCase[5];
 		Cases[0] = new testCase(input: new int[] { 90, 70, 80, 30, 60, 50 },
@@ -296,7 +296,7 @@ public class Submission_HPQ
 		}
 
 		Console.WriteLine(horizontalBand);
-		Console.WriteLine("Part 3: Heapsort. ");
+		Console.WriteLine("B3: Heapsort. ");
 		int[] arrayToSort = new int[] { 5, 12, 3, 20, 8, 15, 1 };
 		Console.WriteLine($"Array Unsorted:             [ {string.Join(", ", arrayToSort)} ]");
 
